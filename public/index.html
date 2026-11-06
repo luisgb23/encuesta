@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Encuesta Itapebí</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- PANTALLA PRINCIPAL: ENCUESTA -->
+  <div id="seccion-encuesta">
+    <h1 class="titulo">En Itapebí queremos saber tu opinión</h1>
+    <h3 class="subtitulo">¿Cómo calificarías nuestro servicio hoy?</h3>
+    <div class="grid-caritas">
+      <div class="tarjeta-carita malo" onclick="votar('Malo')">
+        <span class="emoji">😡</span>
+        <span class="texto-carita">Malo</span>
+      </div>
+      <div class="tarjeta-carita regular" onclick="votar('Regular')">
+        <span class="emoji">😐</span>
+        <span class="texto-carita">Regular</span>
+      </div>
+      <div class="tarjeta-carita bueno" onclick="votar('Bueno')">
+        <span class="emoji">😊</span>
+        <span class="texto-carita">Bueno</span>
+      </div>
+      <div class="tarjeta-carita excelente" onclick="votar('Excelente')">
+        <span class="emoji">🤩</span>
+        <span class="texto-carita">Excelente</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANTALLA SECUNDARIA: AGRADECIMIENTO -->
+  <div id="seccion-gracias" class="pantalla-gracias">
+    <h2 id="gracias-titulo">¡Muchas Gracias! ❤️</h2>
+    <p id="gracias-mensaje">Tu opinión nos ayuda a mejorar constantemente.</p>
+  </div>
+
+  <!-- Botón discreto de acceso al Dashboard (visible en modo kiosco o con ?admin) -->
+  <button class="btn-acceso-admin" onclick="solicitarAcceso()">⚙️ Dashboard</button>
+
+  <!-- LOGIN DE ADMINISTRADOR (reemplaza al PIN) -->
+  <div id="modal-login" class="modal-login">
+    <form onsubmit="iniciarSesion(event)">
+      <h3 style="margin: 0;">Acceso administrador</h3>
+      <input id="login-email" type="email" placeholder="Correo" autocomplete="username" required>
+      <input id="login-password" type="password" placeholder="Contraseña" autocomplete="current-password" required>
+      <p id="login-error"></p>
+      <div class="acciones">
+        <button type="button" class="btn-secundario" onclick="cerrarLogin()">Cancelar</button>
+        <button type="submit" id="login-boton" class="btn-primario">Entrar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- PANTALLA COMPLETA DEL DASHBOARD -->
+  <div id="dashboard" class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h2>📊 Dashboard de Satisfacción</h2>
+        <p id="estado-dashboard"></p>
+      </div>
+      <div class="controles-dashboard">
+        <input type="month" id="selector-mes" onchange="cambiarMes(this.value)">
+        <button class="btn-secundario" onclick="cerrarDashboard()">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="chart-box">
+        <canvas id="graficaVotos"></canvas>
+      </div>
+      <div class="metrics-box">
+        <h3>Resumen Numérico</h3>
+        <div id="lista-metricas" style="margin: 20px 0;"></div>
+        <button class="btn-primario" style="width: 100%;" onclick="exportarCSV()">📥 Descargar Reporte CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/chart.js"></script>
+  <script src="js/dexie.js"></script>
+  <script src="js/scripts.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .catch(err => console.error('Error al registrar el Service Worker', err));
+      });
+    }
+  </script>
+</body>
+</html>

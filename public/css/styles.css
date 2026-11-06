@@ -1,0 +1,397 @@
+/* ==========================================
+   ESTILOS GENERALES Y APARIENCIA DE LA PWA
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none; /* Evita que el cliente seleccione texto al tocar rápido */
+  -webkit-tap-highlight-color: transparent; /* Sin recuadro gris al tocar en celulares */
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #F4F7FC;
+  height: 100vh;
+  height: 100dvh; /* Altura real en celulares (descuenta la barra del navegador) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  padding-top: 60px;
+  overflow: hidden;
+}
+
+#seccion-encuesta {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Título principal de la encuesta */
+.titulo {
+  font-size: 2.5rem;
+  color: #2D3748;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.subtitulo {
+  font-size: 2rem;
+  color: #2D3748;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Contenedor horizontal de las caritas */
+.grid-caritas {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+/* Estructura de tarjeta para cada opción */
+.tarjeta-carita {
+  flex: 1;
+  min-width: 0;
+  height: 220px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Efecto visual al presionar con el dedo */
+.tarjeta-carita:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.emoji {
+  font-size: 5.5rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.texto-carita {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2D3748;
+}
+
+/* Colores pasteles asignados por clase */
+.malo { background-color: #FEB2B2; }
+.regular { background-color: #FEEBC8; }
+.bueno { background-color: #C6F6D5; }
+.excelente { background-color: #9AE6B4; }
+
+/* ==========================================
+   PANTALLA DE AGRADECIMIENTO (Oculta al inicio)
+   ========================================== */
+.pantalla-gracias {
+  display: none; /* Inicia oculta */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pantalla-gracias h2 {
+  font-size: 3.5rem;
+  color: #38A169;
+  margin-bottom: 10px;
+}
+
+#gracias-mensaje {
+  font-size: 1.5rem;
+  color: #718096;
+  margin-top: 10px;
+}
+
+/* ==========================================
+   INTERFAZ DEL DASHBOARD ADMINISTRATIVO
+   ========================================== */
+.btn-acceso-admin {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background-color: transparent;
+  border: 1px solid #E2E8F0;
+  color: #A0AEC0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.dashboard-container {
+  display: none; /* Inicia oculto */
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: #F8FAFC;
+  z-index: 100;
+  padding: 30px;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 2px solid #E2E8F0;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.controles-dashboard {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#selector-mes {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #CBD5E0;
+  border-radius: 8px;
+}
+
+#estado-dashboard {
+  color: #718096;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+.dashboard-grid {
+  display: flex;
+  gap: 30px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-box {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  width: 50%;
+  max-width: 500px;
+}
+
+.metrics-box {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  width: 40%;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.btn-primario {
+  background-color: #3B82F6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-primario:disabled { opacity: 0.6; cursor: wait; }
+
+.btn-secundario {
+  background-color: #64748B;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ==========================================
+   VENTANA DE LOGIN DEL ADMINISTRADOR
+   ========================================== */
+.modal-login {
+  display: none; /* Inicia oculta */
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(45, 55, 72, 0.6);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-login form {
+  background: #fff;
+  padding: 28px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-login input {
+  padding: 12px;
+  font-size: 1rem; /* 16px: evita que el iPhone haga zoom al escribir */
+  border: 1px solid #CBD5E0;
+  border-radius: 8px;
+  user-select: text;
+}
+
+.modal-login .acciones { display: flex; gap: 10px; }
+.modal-login .acciones button { flex: 1; }
+
+#login-error {
+  color: #C53030;
+  min-height: 1.2em;
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   CELULARES (pantallas de hasta 768px de ancho)
+   En tablets y PC todo queda igual que arriba.
+   ========================================== */
+@media (max-width: 768px) {
+
+  body {
+    padding: 16px;
+    padding-top: 32px;
+    padding-bottom: 70px; /* Espacio para el botón de Dashboard */
+    justify-content: center;
+    overflow-y: auto;
+  }
+
+  .titulo {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .subtitulo {
+    font-size: clamp(1.15rem, 5vw, 1.5rem);
+    line-height: 1.3;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  /* Las 4 caritas en cuadrícula de 2 x 2 */
+  .grid-caritas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 420px;
+  }
+
+  .tarjeta-carita {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .emoji {
+    font-size: clamp(3rem, 16vw, 4.5rem);
+    margin-bottom: 8px;
+  }
+
+  .texto-carita {
+    font-size: clamp(1rem, 4.5vw, 1.25rem);
+  }
+
+  .pantalla-gracias { padding: 0 8px; }
+  .pantalla-gracias h2 { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  #gracias-mensaje { font-size: 1.15rem; }
+
+  .btn-acceso-admin {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  /* Dashboard en una sola columna */
+  .dashboard-container { padding: 16px; }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-header h2 { font-size: 1.3rem; }
+
+  .controles-dashboard > * { flex: 1; }
+
+  .dashboard-grid {
+    flex: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .chart-box,
+  .metrics-box {
+    width: 100%;
+    max-width: none;
+  }
+
+  .chart-box { max-width: 360px; margin: 0 auto; }
+
+  .metric-row { font-size: 1.05rem; }
+}
+
+/* ==========================================
+   CELULAR EN HORIZONTAL (poca altura)
+   ========================================== */
+@media (orientation: landscape) and (max-height: 500px) {
+
+  body {
+    padding: 12px 16px 50px;
+    justify-content: center;
+    overflow-y: auto;
+  }
+
+  .titulo { font-size: 1.4rem; margin-bottom: 4px; }
+  .subtitulo { font-size: 1rem; margin-bottom: 12px; }
+
+  .grid-caritas {
+    display: flex;
+    max-width: 640px;
+    gap: 12px;
+  }
+
+  .tarjeta-carita {
+    height: auto;
+    aspect-ratio: auto;
+    padding: 12px 6px;
+  }
+
+  .emoji { font-size: 2.6rem; margin-bottom: 4px; }
+  .texto-carita { font-size: 1rem; }
+
+  .pantalla-gracias h2 { font-size: 2rem; }
+}

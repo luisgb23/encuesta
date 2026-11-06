@@ -1,0 +1,17 @@
+{
+  "short_name": "Encuestas",
+  "name": "Encuesta de Satisfacción Itapebi",
+  "icons": [
+    {
+      "src": "./img/logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#F4F7FC",
+  "theme_color": "#2D3748",
+  "display": "standalone",
+  "orientation": "landscape"
+}
